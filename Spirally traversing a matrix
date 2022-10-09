@@ -1,0 +1,73 @@
+#User function Template for python3
+
+class Solution:
+    
+    #Function to return a list of integers denoting spiral traversal of matrix.
+    def spirallyTraverse(self,matrix, r, c): 
+        # code here 
+        cnt=0
+        ans=[]
+        rt,rd,cl,cr=0,r-1,0,c-1
+        flag=1
+        while (cnt<r*c):
+        
+            if flag==1:
+                for j in range(cl,cr+1):
+                    ans.append(matrix[rt][j])
+                    cnt+=1 
+                    
+                rt+=1 
+                flag=2 
+            
+            elif flag==2:
+                for i in range(rt,rd+1):
+                    ans.append(matrix[i][cr])
+                    cnt+=1
+                    
+                cr-=1 
+                flag=3 
+            
+            elif flag==3:
+                for j in range(cr,cl-1,-1):
+                    ans.append(matrix[rd][j])
+                    cnt+=1
+                   
+                rd-=1 
+                flag=4 
+            
+            elif flag==4:
+                for i in range(rd,rt-1,-1):
+                    ans.append(matrix[i][cl])
+                    cnt+=1
+                    
+                cl+=1 
+                flag=1
+            
+        return ans
+                    
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__':
+    t = int(input())
+    for _ in range(t):
+        r,c = map(int, input().strip().split())
+        values = list(map(int, input().strip().split()))
+        k = 0
+        matrix =[]
+        for i in range(r):
+            row=[]
+            for j in range(c):
+                row.append(values[k])
+                k+=1
+            matrix.append(row)
+        obj = Solution()
+        ans = obj.spirallyTraverse(matrix,r,c)
+        for i in ans:
+            print(i,end=" ")
+        print()
+
+# } Driver Code Ends
